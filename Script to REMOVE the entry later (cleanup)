@@ -1,0 +1,8 @@
+$hostsPath = "$env:SystemRoot\System32\drivers\etc\hosts"
+
+(Get-Content $hostsPath) |
+Where-Object { $_ -notmatch "yourdomain.com" } |
+Set-Content $hostsPath
+
+ipconfig /flushdns
+Write-Output "Hosts entry removed."
