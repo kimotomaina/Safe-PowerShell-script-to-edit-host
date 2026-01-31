@@ -1,0 +1,13 @@
+$hostsPath = "$env:SystemRoot\System32\drivers\etc\hosts"
+$entry = "178.162.234.23 tarajidecors.co.ke www.tarajidecors.co.ke"
+
+# Check if entry already exists
+if (-not (Select-String -Path $hostsPath -Pattern "yourdomain.com" -Quiet)) {
+    Add-Content -Path $hostsPath -Value "`n$entry"
+    Write-Output "Hosts entry added."
+} else {
+    Write-Output "Hosts entry already exists."
+}
+
+# Flush DNS cache
+ipconfig /flushdns
